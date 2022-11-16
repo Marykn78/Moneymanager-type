@@ -9,9 +9,13 @@ const Home = (): JSX.Element => {
     return (
         <Grid container p={2}>
             <Header/>
+            <Grid container justifyContent={'center'}>
             <Total/>
+            </Grid>
+            <Grid container justifyContent={'space-around'}>
             <MoneyCard backgroundColor={'success.main'} title={'هزینه ها'} icon={<TrendingUpIcon/>} type={'income'}/>
             <MoneyCard backgroundColor={'error.main'} title={'خرج ها'} icon={<TrendingDownIcon/>} type={'expense'}/>
+            </Grid>
         </Grid>
     )
 }
