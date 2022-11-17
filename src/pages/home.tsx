@@ -13,8 +13,8 @@ const Home = (): JSX.Element => {
             <Total/>
             </Grid>
             <Grid container justifyContent={'space-around'}>
-            <MoneyCard backgroundColor={'success.main'} title={'هزینه ها'} icon={<TrendingUpIcon/>} type={'income'}/>
-            <MoneyCard backgroundColor={'error.main'} title={'خرج ها'} icon={<TrendingDownIcon/>} type={'expense'}/>
+            <MoneyCard backgroundColor={'primary.dark'} title={'هزینه ها'} icon={<TrendingUpIcon/>} type={'income'}/>
+            <MoneyCard backgroundColor={'primary.dark'} title={'خرج ها'} icon={<TrendingDownIcon/>} type={'expense'}/>
             </Grid>
         </Grid>
     )

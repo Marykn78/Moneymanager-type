@@ -2,13 +2,15 @@ import {Button, Grid, TextField} from "@mui/material";
 import {useCallback, useEffect, useState} from "react";
 import {MoneyType} from "../../model/moneyType";
 import {AddMoneyFormOptions} from "../../data/AddMoneyForm/AddMoneyFormOptions";
-import {useDispatch} from "react-redux";
-import {addMoney} from "../../redux/slice/moneySlice";
+import {useDispatch, useSelector} from "react-redux";
+import {addMoney, updatemoney} from "../../redux/slice/moneySlice";
 import AddMoneyFormDialog from "./AddMoneyFormDialog";
+import { useParams } from "react-router-dom";
 
 const AddMoneyForm = (): JSX.Element => {
     const [disabled, setDisabled] = useState<boolean>(true)
     const [openDialog,setOpenDialog] = useState<boolean>(false)
+    const {updateid}=useParams()
     const [form, setForm] = useState<MoneyType>({
         id: Math.floor(Math.random() * 1000),
         type: '',
@@ -16,20 +18,31 @@ const AddMoneyForm = (): JSX.Element => {
         price: ''
     })
     const dispatch = useDispatch()
-
+    const money =useSelector( (state:{ money: MoneyType[] }) => state.money)
     const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         setForm({...form, [event.target.name]: event.target.value})
     },[form])
-
+    // const [mode,setmode]=useState<string>('add')
     const handleSubmit = () => {
-        dispatch(addMoney(form))
-        setOpenDialog(true)
+        // if(mode=== 'add'){
+            dispatch(addMoney(form))
+            setOpenDialog(true)
+    //     }else{
+    //         dispatch(updatemoney(form))
+    //     }
+    //    setmode('add')
     }
 
     useEffect(() => {
         setDisabled(form.title === '' || form.price === '' || form.type === '')
     }, [form])
 
+    useEffect(()=>{
+        setForm(money.filter(item =>item.id === Number(updateid))[0])
+    },[])
+    const handleUpdate=()=>{
+        dispatch(updatemoney(form))
+    }
     return (
         <Grid container item xs={12}>
             <Grid container item xs={12}>
@@ -52,9 +65,10 @@ const AddMoneyForm = (): JSX.Element => {
                 </Grid>
             </Grid>
             <Grid item xs={12}>
-                <Button fullWidth variant={'contained'} disabled={disabled}
+                <Button fullWidth variant={'contained'} disabled={disabled} 
                         color={form.type === 'income' ? 'success' : 'error'} onClick={handleSubmit}>
                     اضافه کردن {form.type === 'income' ? 'دخل' : 'خرج'}
+                    
                 </Button>
             </Grid>
             <AddMoneyFormDialog open={openDialog}/>

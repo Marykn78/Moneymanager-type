@@ -11,7 +11,11 @@ export const Route = createBrowserRouter([
     {
         path:'/addMoney',
         element: <AddMoney/>
-    }
+    },
+    {
+        path:'/update/:updateid',
+        element: <AddMoney/>
+    },
 ])
 
 

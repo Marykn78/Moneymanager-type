@@ -5,6 +5,7 @@ import {ReactNode} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {MoneyType} from "../../model/moneyType";
 import { deletemony } from "../../redux/slice/moneySlice";
+import { Link } from "react-router-dom";
 
 interface MoneyCardProps {
     backgroundColor: string,
@@ -22,6 +23,7 @@ const MoneyCard = ({backgroundColor, title, icon, type}: MoneyCardProps): JSX.El
     const Handledelete =(id:number)=>{
         dispatch(deletemony(id))
     }
+    
     return (
         <Grid container item xs={12} md={4} sm={6} my={2}
               bgcolor={backgroundColor} p={2} borderRadius={6} color={'common.white'} justifyContent={'space-around'}>
@@ -48,9 +50,11 @@ const MoneyCard = ({backgroundColor, title, icon, type}: MoneyCardProps): JSX.El
                             </CustomIconBtn>
                         </Grid>
                         <Grid item xs={1.5}>
+                            <Link to={`/update/${m.id}`}>
                             <CustomIconBtn>
                                 <ModeEditIcon/>
                             </CustomIconBtn>
+                            </Link>
                         </Grid>
                     </Grid>
                 ))}
