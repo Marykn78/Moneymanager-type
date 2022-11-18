@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 
 const Header = (): JSX.Element => {
     return (
-        <Grid container item xs={12} alignItems={'center'} bgcolor={'primary.main'} p={1} borderRadius={2}
+        <Grid container item xs={12} alignItems={'center'} bgcolor={'primary.light'} p={1} borderRadius={2}
               color={'common.white'}>
             <Grid item xs={6}>
                 <Typography fontWeight={'bold'}>

@@ -9,7 +9,7 @@ const Total = (): JSX.Element => {
     const expense: number = useMemo(() => moneyArr.filter(m => m.type === 'expense').reduce((count, item) => count = count + +item.price, 0), [moneyArr])
     const total: number = income - expense
     return (
-        <Grid alignItems={'center'} container item xs={12} md={2} borderRadius={40} p={4} bgcolor={'secondary.main'}
+        <Grid alignItems={'center'} container item xs={12} md={3} borderRadius={30} p={4} bgcolor={'secondary.main'}
         my={2} color={'common.white'}>
             <Grid item xs={6}>
                 <Typography>

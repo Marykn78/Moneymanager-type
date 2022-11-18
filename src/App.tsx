@@ -15,7 +15,7 @@ function App() {
         <Provider store={store}>
             <ThemeProvider theme={darkMode}>
                 <RouterProvider router={Route}/>
-                <Button onClick={()=>setMode(pre =>(pre === 'light'?'dark':'light'))}>mode</Button>
+                {/* <Button onClick={()=>setMode(pre =>(pre === 'light'?'dark':'light'))}>mode</Button> */}
             </ThemeProvider>
         </Provider>
     )

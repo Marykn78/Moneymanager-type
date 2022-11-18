@@ -21,7 +21,7 @@ export const MoneySlice = createSlice({
             state.splice(index,1)
         },
         updatemoney:(state,action)=>{
-            const index =state.findIndex((item)=>item.id === action.payload)
+            const index =state.findIndex((item)=>item.id === action.payload.id)
             state[index]=action.payload
         }
     }

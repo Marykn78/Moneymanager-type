@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 const AddMoneyForm = (): JSX.Element => {
     const [disabled, setDisabled] = useState<boolean>(true)
     const [openDialog,setOpenDialog] = useState<boolean>(false)
+    const [mode,setMode]=useState<string>('')
     const {updateid}=useParams()
     const [form, setForm] = useState<MoneyType>({
         id: Math.floor(Math.random() * 1000),
@@ -22,15 +23,22 @@ const AddMoneyForm = (): JSX.Element => {
     const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         setForm({...form, [event.target.name]: event.target.value})
     },[form])
-    // const [mode,setmode]=useState<string>('add')
     const handleSubmit = () => {
-        // if(mode=== 'add'){
+        if(mode=== 'add'){
             dispatch(addMoney(form))
-            setOpenDialog(true)
-    //     }else{
-    //         dispatch(updatemoney(form))
-    //     }
-    //    setmode('add')
+            setMode('update')
+            // setOpenDialog(true)
+        }else{
+            dispatch(updatemoney(form))
+        }
+        setOpenDialog(true)
+        setMode('add')
+        setForm({
+            id: Math.floor(Math.random() * 1000),
+            type: '',
+            title: '',
+            price: ''
+        })
     }
 
     useEffect(() => {
@@ -38,17 +46,22 @@ const AddMoneyForm = (): JSX.Element => {
     }, [form])
 
     useEffect(()=>{
-        setForm(money.filter(item =>item.id === Number(updateid))[0])
+        if(updateid){
+            setForm(money.filter(item =>item.id === Number(updateid))[0])
+            setMode('update')
+        }else{
+            setMode('add')
+        }
     },[])
-    const handleUpdate=()=>{
-        dispatch(updatemoney(form))
-    }
+    // const handleUpdate=()=>{
+    //     dispatch(updatemoney(form))
+    // }
     return (
         <Grid container item xs={12}>
             <Grid container item xs={12}>
                 <Grid item xs={12} md={4} p={2}>
                     <TextField name={'type'} onChange={handleChange} select value={form.type} fullWidth
-                               label={'نوع دخل و خرج'} SelectProps={{native: true}}>
+                               label={'نوع دخل و خرج'} SelectProps={{native: true}} >
                         {AddMoneyFormOptions.map(o => (
                             <option key={o.id} value={o.value}>
                                 {o.title}
@@ -64,8 +77,8 @@ const AddMoneyForm = (): JSX.Element => {
                                label={'مبلغ'}/>
                 </Grid>
             </Grid>
-            <Grid item xs={12}>
-                <Button fullWidth variant={'contained'} disabled={disabled} 
+            <Grid item xs={12} >
+                <Button fullWidth variant={'contained'} disabled={disabled}
                         color={form.type === 'income' ? 'success' : 'error'} onClick={handleSubmit}>
                     اضافه کردن {form.type === 'income' ? 'دخل' : 'خرج'}
                     
