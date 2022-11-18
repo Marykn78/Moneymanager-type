@@ -19,7 +19,7 @@ const AddMoneyHeader = (): JSX.Element => {
             </Grid>
             <Grid display={'flex'} justifyContent={'flex-end'} item xs={6}>
                 <Link to={'/'}>
-                    <Button variant={'contained'} sx={{backgroundColor:'primary.light'}}>
+                    <Button variant={'contained'} sx={{backgroundColor:'#1c54b2'}}>
                         <Typography fontSize={12}>
                             بازگشت به صفحه اصلی
                         </Typography>
